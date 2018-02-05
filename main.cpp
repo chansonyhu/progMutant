@@ -194,10 +194,11 @@ bool IsSpecSymbol(char c){
 }
 
 bool IsSpecOperator(string str){
-    int len=sizeof(Spec_Operator)/sizeof("+=\0");
-    for(int i=0;i<len;i++)
-        if(str==Spec_Operator[i])
+    int len = Spec_Operator->length();
+    for(int i=0;i<len;i++) {
+        if (str == Spec_Operator[i])
             return true;
+    }
     return false;
 }
 
@@ -490,7 +491,10 @@ int scanner()
                 else if(IsSpecSymbol(NextChar))
                 {
                     string temp_str=str+NextChar;
-                    if(IsSpecOperator(temp_str))
+
+                    bool s = IsSpecOperator(temp_str);
+                    cout<<temp_str<<endl;
+                    if(s)
                     {
                         str+=NextChar;
                         Token_List[tab_count++].set(4,Type_kinds[4],str,lines_count);
@@ -960,7 +964,9 @@ int main()
 {
     if(!init())
         return 0;
-    if(scanner())
+    int state = scanner();
+    cout<<state<<endl;
+    if(state)
     {
         cout<<"Lexical_Analyzer is failed"<<endl;
         if(fp_log)

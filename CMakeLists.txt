@@ -4,3 +4,5 @@ project(progMutant)
 set(CMAKE_CXX_STANDARD 11)
 
 add_executable(progMutant main.cpp)
+
+add_definitions(-Wall)
